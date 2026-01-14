@@ -72,6 +72,7 @@ services:
     container_name: hummingbot-postgres
     image: postgres:15
     restart: unless-stopped
+    environment:
       - POSTGRES_DB=hummingbot_api
       - POSTGRES_USER=hbot
       - POSTGRES_PASSWORD=${HBOT_DB_PASSWORD:-hummingbot-api}
