@@ -1,14 +1,63 @@
 services:
+  backend-api:
+    container_name: backend-api
+    image: hummingbot/backend-api:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - BROKER_HOST=emqx
+      - BROKER_PORT=1883
+      - BACKEND_API_USERNAME=admin
+      - BACKEND_API_PASSWORD=admin
+    volumes:
+      - ./data:/data
+      - ./credentials:/credentials
+    networks:
+      - hummingbot-network
+    depends_on:
+      - emqx
+
+  emqx:
+    container_name: emqx
+    image: emqx:5
+    restart: unless-stopped
+    environment:
+      - EMQX_NAME=emqx
+      - EMQX_LOADED_PLUGINS="emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"
+    ports:
+      - "1883:1883"    # MQTT
+      - "8083:8083"    # MQTT over WebSocket
+      - "8084:8084"    # MQTT over SSL
+      - "8883:8883"    # MQTT/SSL
+      - "18083:18083"  # EMQX Dashboard
+    networks:
+      - hummingbot-network
+    volumes:
+      - emqx-data:/opt/emqx/data
+      - emqx-log:/opt/emqx/log
+
   dashboard:
     container_name: dashboard
     image: hummingbot/dashboard:latest
     ports:
       - "8501:8501"
     environment:
-        - AUTH_SYSTEM_ENABLED=False
-        - BACKEND_API_HOST=backend-api
-        - BACKEND_API_PORT=8000
-        - BACKEND_API_USERNAME=admin
-        - BACKEND_API_PASSWORD=admin
+      - AUTH_SYSTEM_ENABLED=False
+      - BACKEND_API_HOST=backend-api
+      - BACKEND_API_PORT=8000
+      - BACKEND_API_USERNAME=admin
+      - BACKEND_API_PASSWORD=admin
     volumes:
       - .:/home/dashboard
+    networks:
+      - hummingbot-network
+    depends_on:
+      - backend-api
+
+networks:
+  hummingbot-network:
+    driver: bridge
+
+volumes:
+  emqx-data:
+  emqx-log:
