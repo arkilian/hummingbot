@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  hummingbot:
+    image: hummingbot/hummingbot:latest
+    container_name: hummingbot
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./hummingbot_files/conf:/conf
+      - ./hummingbot_files/logs:/logs
+      - ./hummingbot_files/data:/data
+      - ./hummingbot_files/scripts:/scripts
+      - ./hummingbot_files/certs:/certs
+    environment:
+      - CONFIG_PASSWORD=${CONFIG_PASSWORD:-}
+      - CONFIG_FILE_NAME=${CONFIG_FILE_NAME:-}
+    networks:
+      - hummingbot-net
+    # Porta opcional para dashboard
+    # ports:
+    #   - "8888:8888"
+
+networks:
+  hummingbot-net:
+    driver: bridge
