@@ -8,8 +8,8 @@ services:
         - AUTH_SYSTEM_ENABLED=False
         - BACKEND_API_HOST=hummingbot-api
         - BACKEND_API_PORT=8000
-        - BACKEND_API_USERNAME=admin
-        - BACKEND_API_PASSWORD=admin
+        - BACKEND_API_USERNAME=${HBOT_USERNAME}
+        - BACKEND_API_PASSWORD=${HBOT_PASSWORD}
     volumes:
       - ./credentials.yml:/home/dashboard/credentials.yml
       - ./pages:/home/dashboard/frontend/pages
@@ -28,7 +28,7 @@ services:
     environment:
       # Override specific values for Docker networking
       - BROKER_HOST=emqx
-      - DATABASE_URL=postgresql+asyncpg://hbot:hummingbot-api@postgres:5432/hummingbot_api
+      - DATABASE_URL=${DATABASE_URL:-postgresql+asyncpg://hbot:hummingbot-api@postgres:5432/hummingbot_api}
     networks:
       - emqx-bridge
     depends_on:
