@@ -1,12 +1,53 @@
-# Hummingbot
+# Hummingbot - Sistema Completo de Trading Automatizado
 
-## 🤖 Assistente Especializado em Hummingbot
+## 🎯 Status do Projeto
 
-Este repositório contém informações e recursos sobre o **Hummingbot**, um framework open source em Python para criação de bots de market making e trading algorítmico, com foco na documentação oficial em [https://hummingbot.org/docs/](https://hummingbot.org/docs/)
+✅ **Sistema Instalado e Funcionando**
+
+Este repositório contém o **Hummingbot Deploy** completo, incluindo:
+- 🤖 Bot Hummingbot de trading algorítmico
+- 📊 Dashboard web para gestão e monitoramento
+- 🔌 API backend para operações avançadas
+- 💾 PostgreSQL para persistência de dados
+- 📡 EMQX MQTT broker para comunicação em tempo real
 
 ---
 
-## 📖 O que é Hummingbot?
+## 🚀 Início Rápido
+
+### Iniciar Todos os Serviços
+
+```powershell
+cd c:\github\hummingbot\deploy
+docker-compose up -d
+Start-Process http://localhost:8501
+```
+
+### Acesso aos Serviços
+
+- **Dashboard**: http://localhost:8501
+- **API Docs**: http://localhost:8000/docs
+- **EMQX Broker**: http://localhost:18083 (admin/public)
+
+### Credenciais Padrão
+
+- **Dashboard/API**: `admin` / `admin`
+- **EMQX**: `admin` / `public`
+
+---
+
+## 📚 Documentação Disponível
+
+| Documento | Descrição |
+|-----------|-----------|
+| [RESUMO_EXECUTIVO.md](RESUMO_EXECUTIVO.md) | 📋 Visão geral do sistema e status |
+| [GUIA_COMPLETO_DEPLOY.md](GUIA_COMPLETO_DEPLOY.md) | 📖 Guia completo de instalação e uso |
+| [COMANDOS_RAPIDOS.md](COMANDOS_RAPIDOS.md) | ⚡ Referência rápida de comandos |
+| [RESOLUCAO_PROBLEMA.md](RESOLUCAO_PROBLEMA.md) | 🔍 Histórico técnico da implementação |
+
+---
+
+## 🤖 O que é Hummingbot?
 
 Hummingbot é um framework open source baseado em Python projetado especificamente para **market making automatizado** e **trading algorítmico** em exchanges de criptomoedas (centralizadas e descentralizadas). É amplamente utilizado por traders profissionais e de varejo devido à sua modularidade, flexibilidade e forte suporte da comunidade.
 

@@ -43,17 +43,15 @@ services:
     ports:
       - "8501:8501"
     environment:
-      - AUTH_SYSTEM_ENABLED=False
-      - BACKEND_API_HOST=backend-api
-      - BACKEND_API_PORT=8000
-      - BACKEND_API_USERNAME=admin
-      - BACKEND_API_PASSWORD=admin
+      - CONFIG_PASSWORD=abc
+      - BROKER_HOST=emqx
+      - BROKER_PORT=1883
     volumes:
       - .:/home/dashboard
     networks:
       - hummingbot-network
     depends_on:
-      - backend-api
+      - emqx
 
 networks:
   hummingbot-network:
